@@ -27,64 +27,84 @@ A simple and functional **RESTful API** built with **Node.js**, **Express**, and
 
 ---
 
-## 🧪 How to Test with Postman
+## 📫 API Endpoints
 
-1. **Register a user**  
-   `POST /api/auth/register`  
-   ```json
-   {
-     "name": "John Doe",
-     "email": "john@example.com",
-     "password": "123456"
-   }
-````
+### Auth
 
-2. **Login to get token**
-   `POST /api/auth/login`
-   Returns a JWT token. Use this in the `Authorization` header as:
+#### ✅ Register a new user
+`POST /api/auth/register`
 
-   ```
-   Bearer <your_token>
-   ```
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "123456"
+}
+🔐 Login to receive a token
+POST /api/auth/login
 
-3. **Add a book (Authenticated)**
-   `POST /api/books`
+Returns:
 
-   ```json
-   {
-     "title": "Atomic Habits",
-     "authors": ["James Clear"],
-     "price": 25
-   }
-   ```
+json
+Copy
+Edit
+{
+  "token": "your_jwt_token"
+}
+Use this token in Postman under:
 
-4. **Buy a book (Authenticated)**
-   `POST /api/purchases/:bookId`
+yaml
+Copy
+Edit
+Authorization → Type: Bearer Token → Token: your_jwt_token
+Books
+➕ Add a new book (Authenticated)
+POST /api/books
 
-   ```json
-   {
-     "quantity": 2
-   }
-   ```
+json
+Copy
+Edit
+{
+  "title": "Atomic Habits",
+  "authors": ["James Clear"],
+  "price": 25
+}
+📖 Get all books
+GET /api/books
 
-5. **View your purchases**
-   `GET /api/purchases`
+📝 Update a book (Authenticated)
+PUT /api/books/:id
 
----
+❌ Delete a book (Authenticated)
+DELETE /api/books/:id
 
-## 🛠️ Tech Stack
+Purchases
+🛒 Buy a book (Authenticated)
+POST /api/purchases/:bookId
 
-* **Backend**: Node.js, Express.js
-* **Database**: MongoDB, Mongoose
-* **Authentication**: JWT, bcrypt
-* **Tools**: Postman for API testing
+json
+Copy
+Edit
+{
+  "quantity": 2
+}
+📦 Get user's purchase history (Authenticated)
+GET /api/purchases
 
----
+🛠️ Tech Stack
+Backend: Node.js, Express.js
 
-## 📁 Project Structure
+Database: MongoDB, Mongoose
 
-```
-backend/
+Authentication: JWT, bcrypt
+
+Testing: Postman
+
+📁 Project Structure
+pgsql
+Copy
+Edit
+bookstore-api/
 ├── controllers/
 ├── models/
 ├── routes/
@@ -92,20 +112,15 @@ backend/
 ├── utils/
 ├── .env
 └── server.js
-```
+👨‍💻 Author
+Mohamed Emad
+Feel free to fork, clone, or contribute to this project.
 
----
+📌 Notes
+Built for backend practice and portfolio.
 
-## 🧑‍💻 Author
+Includes full CRUD operations.
 
-**Mohamed Emad**
-Built as a portfolio backend project. Feel free to fork or reach out if you’d like to collaborate!
+JWT-secured endpoints.
 
----
-
-## 📌 Notes
-
-* Built for backend learning and practice
-* Includes all core RESTful operations
-* Handles validation and token errors gracefully
-
+Handles all basic validation and errors gracefully.
