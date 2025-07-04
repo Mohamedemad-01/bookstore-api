@@ -1,49 +1,64 @@
 # 📚 Bookstore API
 
-A simple and functional **RESTful API** built with **Node.js**, **Express**, and **MongoDB** that allows users to register, log in, browse books, and make purchases. Designed as a backend project for learning and portfolio development.
+A fully functional **RESTful API** built with **Node.js**, **Express**, and **MongoDB**, designed for learning and portfolio development. This API allows users to register, log in, browse books, and make purchases securely using JWT authentication.
 
 ---
 
 ## 🚀 Features
--
-- 🔐 **User Authentication**
-  - Register new users
-  - Secure password hashing with bcrypt
-  - Login with JWT token generation
-  - Auth middleware with `Bearer <token>` support
 
-- 📚 **Books API**
-  - Add, view, update, and delete books
-  - Supports multiple authors (array of strings or references)
+### 🔐 User Authentication
+- Register new users
+- Login with JWT token generation
+- Secure password hashing using bcrypt
+- Middleware handles Bearer Token (`Authorization: Bearer <token>`)
 
-- 🛒 **Purchase System**
-  - Authenticated users can buy books
-  - Purchase includes quantity, book reference, user, and timestamp
-  - Fetch all past purchases by the logged-in user
-  - Fully secured and validated
+### 📚 Book Management
+- Add, view, update, and delete books (CRUD)
+- Support for multiple authors (as an array of strings or references)
 
-- ✅ **Token-based route protection**
-  - Routes secured via middleware
-  - JWT decoded to get current user context
+### 🛒 Purchase System
+- Authenticated users can purchase books
+- Each purchase includes: user, book, quantity, and date
+- View all purchases made by the logged-in user
+
+### ✅ Route Protection
+- All protected routes use token-based authentication
+- Tokens are verified and decoded via middleware
 
 ---
 
-## 🧪 How to Test with Postman
+## 📫 API Endpoints
 
-1. **Register a user**  
-   `POST /api/auth/register`  
-   ```json
-   {
-     "name": "John Doe",
-     "email": "john@example.com",
-     "password": "123456"
-   }
-Login to get token
+### Auth
+
+#### ✅ Register a new user
+`POST /api/auth/register`
+
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "123456"
+}
+🔐 Login to receive a token
 POST /api/auth/login
-Returns a JWT token. Use this in the Authorization header:
-Bearer <your_token>
 
-Add a book (Authenticated)
+Returns:
+
+json
+Copy
+Edit
+{
+  "token": "your_jwt_token"
+}
+Use this token in Postman under:
+
+yaml
+Copy
+Edit
+Authorization → Type: Bearer Token → Token: your_jwt_token
+Books
+➕ Add a new book (Authenticated)
 POST /api/books
 
 json
@@ -54,7 +69,17 @@ Edit
   "authors": ["James Clear"],
   "price": 25
 }
-Buy a book (Authenticated)
+📖 Get all books
+GET /api/books
+
+📝 Update a book (Authenticated)
+PUT /api/books/:id
+
+❌ Delete a book (Authenticated)
+DELETE /api/books/:id
+
+Purchases
+🛒 Buy a book (Authenticated)
 POST /api/purchases/:bookId
 
 json
@@ -63,7 +88,7 @@ Edit
 {
   "quantity": 2
 }
-View your purchases
+📦 Get user's purchase history (Authenticated)
 GET /api/purchases
 
 🛠️ Tech Stack
@@ -73,27 +98,40 @@ Database: MongoDB, Mongoose
 
 Authentication: JWT, bcrypt
 
-Tools: Postman for API testing
+Testing: Postman
 
 📁 Project Structure
-bash
+pgsql
 Copy
 Edit
-backend/
+bookstore-api/
 ├── controllers/
-├── models/
-├── routes/
+│   ├── AuthController.js
+│   ├── BookController.js
+│   └── PurchaseController.js
 ├── middleware/
+│   └── Auth.js
+├── models/
+│   ├── User.js
+│   ├── Book.js
+│   └── Purchase.js
+├── routes/
+│   ├── auth.js
+│   ├── books.js
+│   └── purchases.js
 ├── utils/
+│   └── db.js
 ├── .env
 └── server.js
-🧑‍💻 Author
+👨‍💻 Author
 Mohamed Emad
-Feel free to connect or fork the project if you'd like to contribute or test it.
+Feel free to fork, clone, or contribute to this project.
 
 📌 Notes
-Built as a backend learning project.
+Built for backend practice and portfolio.
 
-Includes all core RESTful operations.
+Includes full CRUD operations.
 
-Handles validation and token errors gracefully.
+JWT-secured endpoints.
+
+Handles all basic validation and errors gracefully.
