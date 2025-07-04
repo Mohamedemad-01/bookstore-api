@@ -1,64 +1,51 @@
 # 📚 Bookstore API
 
-A fully functional **RESTful API** built with **Node.js**, **Express**, and **MongoDB**, designed for learning and portfolio development. This API allows users to register, log in, browse books, and make purchases securely using JWT authentication.
+A simple and functional **RESTful API** built with **Node.js**, **Express**, and **MongoDB** that allows users to register, log in, browse books, and make purchases. Designed as a backend project for learning and portfolio development.
 
 ---
 
 ## 🚀 Features
 
-### 🔐 User Authentication
-- Register new users
-- Login with JWT token generation
-- Secure password hashing using bcrypt
-- Middleware handles Bearer Token (`Authorization: Bearer <token>`)
+- 🔐 **User Authentication**
+  - Register new users
+  - Secure password hashing with bcrypt
+  - Login with JWT token generation
+  - Auth middleware with `Bearer <token>` support
 
-### 📚 Book Management
-- Add, view, update, and delete books (CRUD)
-- Support for multiple authors (as an array of strings or references)
+- 📚 **Books API**
+  - Add, view, update, and delete books
+  - Supports multiple authors (array of strings or references)
 
-### 🛒 Purchase System
-- Authenticated users can purchase books
-- Each purchase includes: user, book, quantity, and date
-- View all purchases made by the logged-in user
+- 🛒 **Purchase System**
+  - Authenticated users can buy books
+  - Purchase includes quantity, book reference, user, and timestamp
+  - Fetch all past purchases by the logged-in user
 
-### ✅ Route Protection
-- All protected routes use token-based authentication
-- Tokens are verified and decoded via middleware
+- ✅ **Token-based route protection**
+  - Routes secured via middleware
+  - JWT decoded to get current user context
 
 ---
 
-## 📫 API Endpoints
+## 🧪 How to Test with Postman
 
-### Auth
-
-#### ✅ Register a new user
-`POST /api/auth/register`
-
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "123456"
-}
-🔐 Login to receive a token
+1. **Register a user**  
+   `POST /api/auth/register`  
+   ```json
+   {
+     "name": "John Doe",
+     "email": "john@example.com",
+     "password": "123456"
+   }
+Login to get token
 POST /api/auth/login
+Returns a JWT token. Use this in the Authorization header as:
 
-Returns:
-
-json
+php-template
 Copy
 Edit
-{
-  "token": "your_jwt_token"
-}
-Use this token in Postman under:
-
-yaml
-Copy
-Edit
-Authorization → Type: Bearer Token → Token: your_jwt_token
-Books
-➕ Add a new book (Authenticated)
+Bearer <your_token>
+Add a book (Authenticated)
 POST /api/books
 
 json
@@ -69,17 +56,7 @@ Edit
   "authors": ["James Clear"],
   "price": 25
 }
-📖 Get all books
-GET /api/books
-
-📝 Update a book (Authenticated)
-PUT /api/books/:id
-
-❌ Delete a book (Authenticated)
-DELETE /api/books/:id
-
-Purchases
-🛒 Buy a book (Authenticated)
+Buy a book (Authenticated)
 POST /api/purchases/:bookId
 
 json
@@ -88,7 +65,7 @@ Edit
 {
   "quantity": 2
 }
-📦 Get user's purchase history (Authenticated)
+View your purchases
 GET /api/purchases
 
 🛠️ Tech Stack
@@ -98,40 +75,27 @@ Database: MongoDB, Mongoose
 
 Authentication: JWT, bcrypt
 
-Testing: Postman
+Tools: Postman for API testing
 
 📁 Project Structure
-pgsql
+bash
 Copy
 Edit
-bookstore-api/
+backend/
 ├── controllers/
-│   ├── AuthController.js
-│   ├── BookController.js
-│   └── PurchaseController.js
-├── middleware/
-│   └── Auth.js
 ├── models/
-│   ├── User.js
-│   ├── Book.js
-│   └── Purchase.js
 ├── routes/
-│   ├── auth.js
-│   ├── books.js
-│   └── purchases.js
+├── middleware/
 ├── utils/
-│   └── db.js
 ├── .env
 └── server.js
-👨‍💻 Author
+🧑‍💻 Author
 Mohamed Emad
-Feel free to fork, clone, or contribute to this project.
+Built as a portfolio backend project. Feel free to fork or reach out if you’d like to collaborate!
 
 📌 Notes
-Built for backend practice and portfolio.
+Built for backend learning and practice
 
-Includes full CRUD operations.
+Includes all core RESTful operations
 
-JWT-secured endpoints.
-
-Handles all basic validation and errors gracefully.
+Handles validation and token errors gracefully
